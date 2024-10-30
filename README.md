@@ -28,5 +28,15 @@ Number of toggle for 1hr time: 18,000
 
 ### GPIO Jitter Measurement
 
+**Without Block Delay**
+
+Output Trigger Delay 18us
+
+Average Delay Between Sync sign and Output 18us
+
+
+**With Block Delay**
+
 Output Trigger Delay 7.65 ms
+
 Average Delay Between Sync sign and Output 4.6800ms
