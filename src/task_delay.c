@@ -3,6 +3,10 @@
 #include <FreeRTOS.h>
 #include <task.h>
 
+#define OUT_PIN 14
+#define DELAY_MS 100
+#define BUSY_LOOP
+
 void main_task(__unused void *params)
 {
     int toggle = 0;
@@ -11,6 +15,11 @@ void main_task(__unused void *params)
         toggle = !toggle;
         gpio_put(OUT_PIN, toggle);
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
+#ifdef BUSY_LOOP
+        int i = 1024 * 1024;
+        while (i)
+            i--;
+#endif
     }
 }
 

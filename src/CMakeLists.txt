@@ -1,8 +1,8 @@
 # This is the main binary. List your C files here.
 add_executable(realtime
-    sleep.c
+    # sleep.c
     # timer.c
-    # task_delay.c
+    task_delay.c
 )
 
 pico_set_program_name(realtime "test")

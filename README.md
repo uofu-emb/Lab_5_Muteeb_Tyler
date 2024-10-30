@@ -3,13 +3,24 @@
 - Muteeb Akram
 - Tyler
 
-# Renode setup
-The Raspberry Pico needs configuration files for Renode to work properly.
+### Jitter Measurement
 
-* On MacOS, the installation location is `/Applications/Renode.app/Contents/MacOs`
-* On Linux, the location for Debian, Fedora, and Arch is `/opt/renode`
-* On Windows, the location is `C://Program Files/Renode`
+Measurement is for the full toggle; ON->OFF->ON.
 
-To add the Pico configuration files:
-1. Copy `rp2040_spinlock.py` and `rp2040_divider.py` to the `scripts/pydev` directory of your Renode installation.
-1. Copy `rpi_pico_rp2040_w.repl` to the `platforms/cpus` directory.
+Expected Toggle time: 200ms
+
+Number of toggle for 1hr time: 18,000
+
+
+| Sleep Function | Mean Time (ms) | Mean Frequency | Mean Duty+ Cycle | Drift for 1hr|
+|-------------|------------------|-------------|------------------|-------------|
+| sleep.c | 202.415 | 4.9Hz | 50% | (202.415-200)*18000 ms = 43.47 sec |
+| task_delay.c | 199.998 | 4.9997Hz | 50% | (216.415-200)*18000 ms = 295.47 sec |
+| timer.c | 266.006 | 3.759Hz | 50% | (216.415-200)*18000 ms = 295.47 sec |
+
+
+| Sleep Function | Mean Time (ms) | Mean Frequency | Mean Duty+ Cycle | Drift for 1hr|
+|-------------|------------------|-------------|------------------|-------------|
+| sleep.c | 216.608 | 4.648Hz | 50.01% | (216.415-200)*18000 ms = 295.47 sec |
+| task_delay.c | 266.004 | 4.7593Hz | 50% | (266.004-200)*18000 ms = 1,188.072 sec |
+| timer.c | 263.146 | 3.8145Hz | 50.01% | (263.146-200)*18000 ms = 1,136.628 sec |

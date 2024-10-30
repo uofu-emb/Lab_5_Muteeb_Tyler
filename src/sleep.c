@@ -4,6 +4,8 @@
 #define OUT_PIN 14
 #define DELAY_MS 100
 
+#define BUSY_LOOP 
+
 int pico_led_init(void)
 {
 #if defined(PICO_DEFAULT_LED_PIN)
@@ -52,5 +54,10 @@ int main(void)
         gpio_put(OUT_PIN, toggle);
         pico_set_led(toggle);
         sleep_ms(DELAY_MS);
+#ifdef BUSY_LOOP
+        int i = 1024 * 1024;
+        while (i)
+            i--;
+#endif
     }
 }
